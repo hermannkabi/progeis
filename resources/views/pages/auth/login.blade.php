@@ -16,7 +16,8 @@
         @csrf
         <input name="email" type="email" placeholder="E-post">
         <input name="password" type="password" placeholder="Parool">
-
+        <input type="checkbox" name="remember" id="remember">
+        <label for="remember">Jäta meelde</label>
         <button type="submit">Logi sisse</button>
     </form>
     <a href="{{route('register')}}">Loo konto</a>

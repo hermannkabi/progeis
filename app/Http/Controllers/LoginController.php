@@ -24,7 +24,7 @@ class LoginController extends Controller
             "password.min"=>"Parool peab olema vähemalt 8 tähemärki pikk"
         ]);
 
-        if(Auth::attempt($credentials)){
+        if(Auth::attempt($request->only(["email", "password"]), $request->remember ?? false)){
             $request->session()->regenerate();
 
             return redirect()->intended("home");
