@@ -1,23 +1,64 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Http\Request;
+use App\Models\User;
 
 class LoginController extends Controller
 {
     function showLogin(){
-        return view("pages.login");
+        if(Auth::check()){
+            return redirect()->route("dashboard");
+        }
+        return view("pages.auth.login");
     }
 
     function login(Request $request){
-        $request->validate([
+        $credentials = $request->validate([
             "email"=>"required|email",
-            "pwd"=>"required|min:8",
+            "password"=>"required|min:8",
         ], [
             "email.required"=>"E-posti aadress on kohustuslik",
+            "password.min"=>"Parool peab olema vähemalt 8 tähemärki pikk"
         ]);
 
-        return redirect()->route("home");
+        if(Auth::attempt($credentials)){
+            $request->session()->regenerate();
+
+            return redirect()->intended("home");
+        }
+
+
+        return back()->withErrors([
+            'email' => 'Vale e-posti aadress/parool.',
+        ]);
+    }
+
+
+    function showRegister(){
+        if(Auth::check()){
+            return redirect()->route("home");
+        }
+        return view("pages.auth.register");
+    }
+
+    function register(Request $request){
+        $credentials = $request->validate([
+            "name"=>"required|min:3",
+            "email"=>"required|email",
+            "password"=>"required|min:8|confirmed",
+        ], [
+            "name.required"=>"Nimi on kohustuslik",
+            "email.required"=>"E-posti aadress on kohustuslik",
+            "password.min"=>"Parool peab olema vähemalt 8 tähemärki pikk",
+        ]);
+
+        $user = User::create(["name"=>$request->name, "email"=>$request->email, "password"=>Hash::make($request->password)]);
+
+        Auth::login($user);
+
+        return redirect()->route("dashboard");
     }
 }
