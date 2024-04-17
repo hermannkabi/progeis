@@ -31,9 +31,7 @@ class LoginController extends Controller
         }
 
 
-        return back()->withErrors([
-            'email' => 'Vale e-posti aadress/parool.',
-        ]);
+        return redirect()->route("register");
     }
 
 
@@ -47,7 +45,7 @@ class LoginController extends Controller
     function register(Request $request){
         $credentials = $request->validate([
             "name"=>"required|min:3",
-            "email"=>"required|email",
+            "email"=>"required|email|unique:users",
             "password"=>"required|min:8|confirmed",
         ], [
             "name.required"=>"Nimi on kohustuslik",

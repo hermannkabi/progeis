@@ -6,7 +6,7 @@ use Illuminate\Support\Facades\Route;
 Route::middleware(["auth"])->group(function (){
     // Dashboard view (show available tests & results)
     Route::get('/', function () {
-        return view('pages.dashboard');
+        return view('pages.dashboard', ["tests"=>app("App\Http\Controllers\TestController")->getTests()]);
     })->name("dashboard");
 
     Route::get("/logout", function (){

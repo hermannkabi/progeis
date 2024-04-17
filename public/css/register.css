@@ -1,0 +1,16 @@
+.container{
+    position: absolute;
+    top: 230px;
+    right: 50px;
+    background-color: #BAB7B7;
+    margin: 4px;
+    width: 800px;
+    height: 350px;
+    transform: rotate(-2deg);
+}
+
+.jama{
+    position: absolute;
+    top: 230px;
+    right: 1000px;
+}

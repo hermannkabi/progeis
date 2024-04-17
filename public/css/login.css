@@ -1,0 +1,24 @@
+.placement{
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100vh;
+    width: 100vw;
+}
+
+.container{
+    position: relative;
+    top: 230px;
+    left: 400px;
+    background-color: #BAB7B7;
+    margin: 4px;
+    width: 800px;
+    height: 350px;
+}
+
+
+.content{
+    padding: 16px;
+    padding-bottom: 36px;
+    margin-left: 45%;
+}

@@ -1,0 +1,16 @@
+input, button{
+    height: 50px;
+    background-color: #D9D9D9;
+    width: 275px;
+    border: none;
+    outline: none;
+    padding: 0;
+    font-size: 5em;
+    margin-bottom: 64px;
+    display: block;
+}
+
+
+.kallutatud{
+    transform: rotate(-6deg);
+}
