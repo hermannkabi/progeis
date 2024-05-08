@@ -14,14 +14,16 @@
     <img src="{{ $question->image }}" alt="">
     <form action="" method="post">
         @csrf
-        @forelse (explode(";", $question->choices) as $choice)
-            <div class="choice">
-                <input type="radio" name="choice" id="{{$choice}}" value="{{$choice}}" required>
-                <label for="{{$choice}}">{{$choice}}</label>
-            </div>
-        @empty
-            <input type="text" placeholder="Sisesta vastus" name="answer">
-        @endforelse
+        @if($question->choices == null)
+            <input type="text" placeholder="Sisesta vastus" name="choice">
+        @else
+            @foreach (explode(";", $question->choices) as $choice)
+                <div class="choice">
+                    <input type="radio" name="choice" id="{{$choice}}" value="{{$choice}}" required>
+                    <label for="{{$choice}}">{{$choice}}</label>
+                </div>
+            @endforeach
+        @endif
 
         <button>Järgmine küsimus</button>
     </form>
