@@ -15,18 +15,21 @@
     <script>
         console.log("{{ $tests }}");
     </script>
-    <h1 class="name">Tere, {{ Auth::user()->name }}!</h1>
-
-    <div class="cards">
+    <h1 style="margin-bottom: 0" class="name">Tere, {{ Auth::user()->name }}!</h1>
+    <a style="margin: 8px 0 36px 24px; color: red; text-decoration:none;" href="{{route('logout')}}">logi välja</a>
+    @if(Session::get('info'))
+    <p style="margin-left: 24px">{{Session::get('info')}}</p>
+    @endif
+    <div class="cards" style="margin-top: 36px">
     @forelse ($tests as $test)
-        <div class="card">
+        <div class="card" onclick="window.location.href = '/test/{{ $test->id }}/0'">
             <img src="{{ $test->img }}" alt="">
             <div class="info">
                 <h2>{{ $test->name }}</h2>
 
                 <div class="additional-info">
-                    <p>10 küsimust</p>
-                    <p>60p</p>
+                    <p> -</p>
+                    <p>{{(random_int(1, 60) + random_int(1, 60))/2}}p</p>
                 </div>
             </div>
 
